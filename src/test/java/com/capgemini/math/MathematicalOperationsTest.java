@@ -50,4 +50,29 @@ public class MathematicalOperationsTest {
 		Assertions.assertThat(result).isFalse();
 	}
 
+	@Test
+	public void maxIntegerValueExponentiationTest() {
+
+		// given
+		int number = Integer.MAX_VALUE;
+
+		// when
+		long result = MathematicalOperations.exponentiation(number);
+		// then
+		Assertions.assertThat(result).isEqualTo(4611686014132420608L);
+
+	}
+	@Test
+	public void minIntegerValueExponentiationTest() {
+
+		// given
+		int number = Integer.MIN_VALUE;
+
+		// when
+		long result = MathematicalOperations.exponentiation(number);
+		// then
+		Assertions.assertThat(result).isEqualTo(4611686018427387904L);
+
+	}
+
 }

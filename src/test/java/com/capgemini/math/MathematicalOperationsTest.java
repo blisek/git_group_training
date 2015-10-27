@@ -2,9 +2,13 @@ package com.capgemini.math;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+<<<<<<< HEAD
 
 import java.math.RoundingMode;
+=======
+>>>>>>> michal/master
 
+import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -50,7 +54,28 @@ public class MathematicalOperationsTest {
 		int result = 1;
 		// when,then
 		assertEquals(result, MathematicalOperations.divisionWithRounding(x, y, RoundingMode.DOWN));
+}
 
+	@Test
+	public void testNumberIsParity() {
+		// given
+		int number = 6;
+
+		// when
+		boolean result = MathematicalOperations.parityNumber(number);
+		// then
+		Assertions.assertThat(result).isTrue();
+	}
+
+	@Test
+	public void testNumberIsNotParity() {
+		// given
+		int number = 5;
+
+		// when
+		boolean result = MathematicalOperations.parityNumber(number);
+		// then
+		Assertions.assertThat(result).isFalse();
 	}
 
 }

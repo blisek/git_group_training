@@ -14,6 +14,9 @@ public class MathematicalOperations {
 	public static int divisionWithRounding(int value1, int value2, RoundingMode mode) {
 
 		return IntMath.divide(value1, value2, mode);
+	}
 
+	public static boolean parityNumber(int value) {
+		return value % 2 == 0 ? true : false;
 	}
 }

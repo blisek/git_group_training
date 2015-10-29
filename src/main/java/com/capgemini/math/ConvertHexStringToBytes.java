@@ -12,22 +12,22 @@ public class ConvertHexStringToBytes {
 			if (testHex(hex)) {
 				tabBytes = BinaryUtils.convertHexStringToBytes(hex);
 			} else {
-				throw new ConvertHexStringToBytesException("String must by hex");
+				throw new ConvertHexStringToBytesException("String must be hex");
 			}
 		} else {
-			throw new ConvertHexStringToBytesException("Numbers chars in String must by even");
+			throw new ConvertHexStringToBytesException("Length string must be even");
 		}
 		return tabBytes;
 	}
 
 	private boolean testHex(String value) {
-		boolean ret;
+		boolean isHex;
 		try {
 			Integer.parseInt(value, 16);
-			ret = true;
+			isHex = true;
 		} catch (NumberFormatException e) {
-			ret = false;
+			isHex = false;
 		}
-		return (ret);
+		return isHex;
 	}
 }

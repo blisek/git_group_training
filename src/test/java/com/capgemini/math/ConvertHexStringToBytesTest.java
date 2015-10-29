@@ -111,7 +111,7 @@ public class ConvertHexStringToBytesTest {
 	public void test_Exception_with_no_even() {
 		// given
 		String hex = "123";
-		String throwInfo = "Numbers chars in String must by even";
+		String throwInfo = "Length string must be even";
 		String throwString = "";
 		// when
 		try {
@@ -126,7 +126,7 @@ public class ConvertHexStringToBytesTest {
 	public void test_Exception_String_not_hex() {
 		// given
 		String hex = "xx";
-		String throwInfo = "String must by hex";
+		String throwInfo = "String must be hex";
 		String throwString = "";
 		// when
 		try {

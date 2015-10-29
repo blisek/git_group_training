@@ -75,7 +75,7 @@ public class INIParserTest {
 		
 		parser.parse(validXMLStream);
 		Properties prop = parser.getSection(sectionName);
-		Object propValue = prop.getOrDefault(propertyName, null);
+		Object propValue = prop.getProperty(propertyName);
 		
 		assertNotNull(propValue);
 		assertEquals(propertyValueExpected, propValue);

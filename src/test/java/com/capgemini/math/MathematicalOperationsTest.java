@@ -2,7 +2,7 @@ package com.capgemini.math;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-
+import java.math.RoundingMode;
 import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -29,6 +29,29 @@ public class MathematicalOperationsTest {
 	}
 
 	@Test
+	public void testDivisionModeCeiling() {
+
+		// given
+		int x = 7;
+		int y = 4;
+		int result = 2;
+		// when,then
+		assertEquals(result, MathematicalOperations.divisionWithRounding(x, y, RoundingMode.CEILING));
+
+	}
+
+	@Test
+	public void testDivisionModeDown() {
+
+		// given
+		int x = 7;
+		int y = 4;
+		int result = 1;
+		// when,then
+		assertEquals(result, MathematicalOperations.divisionWithRounding(x, y, RoundingMode.DOWN));
+}
+
+	@Test
 	public void testNumberIsParity() {
 		// given
 		int number = 6;
@@ -48,6 +71,31 @@ public class MathematicalOperationsTest {
 		boolean result = MathematicalOperations.parityNumber(number);
 		// then
 		Assertions.assertThat(result).isFalse();
+	}
+
+	@Test
+	public void maxIntegerValueExponentiationTest() {
+
+		// given
+		int number = Integer.MAX_VALUE;
+
+		// when
+		long result = MathematicalOperations.exponentiation(number);
+		// then
+		Assertions.assertThat(result).isEqualTo(4611686014132420608L);
+
+	}
+	@Test
+	public void minIntegerValueExponentiationTest() {
+
+		// given
+		int number = Integer.MIN_VALUE;
+
+		// when
+		long result = MathematicalOperations.exponentiation(number);
+		// then
+		Assertions.assertThat(result).isEqualTo(4611686018427387904L);
+
 	}
 
 }

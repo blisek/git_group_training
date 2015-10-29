@@ -128,4 +128,26 @@ public class MathematicalOperationsTest {
 		double result = MathematicalOperations.base10Logarithm(value);
 		Assertions.assertThat(result).isEqualTo(Double.NEGATIVE_INFINITY);
 	}
+	
+	@Test 
+	public void testCountRemainder() {
+		// given
+		String first = "7";
+		String second = "5";
+		// when
+		long result = MathematicalOperations.remainderOfDivision(first, second);
+		// then
+		Assertions.assertThat(result).isEqualTo(2);
+	}
+	
+	@Test
+	public void testCountRemainderNonValidString() {
+		// given
+		String first = "_";
+		String second = "5";
+		// when
+		long result = MathematicalOperations.remainderOfDivision(first, second);
+		// then
+		Assertions.assertThat(result).isEqualTo(-1);
+	}
 }

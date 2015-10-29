@@ -2,6 +2,7 @@ package com.capgemini.math;
 
 import java.math.RoundingMode;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.google.common.math.IntMath;
@@ -34,5 +35,12 @@ public class MathematicalOperations {
 
 	public static double base10Logarithm(double value) {
 		return Math.log10(value);
+	}
+	
+	public static Integer remainderOfDivision(String first, String second) {
+		if(StringUtils.isNumeric(first) && StringUtils.isNumeric(second)) {
+			return Integer.parseInt(first) % Integer.parseInt(second);
+		}
+		return -1;
 	}
 }

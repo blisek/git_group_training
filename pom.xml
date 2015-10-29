@@ -40,8 +40,10 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-
-
+		<dependency>
+			<groupId>org.uncommons.maths</groupId>
+			<artifactId>uncommons-maths</artifactId>
+		</dependency>
 	</dependencies>
 
 
@@ -81,8 +83,11 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>3.4</version>
 			</dependency>
-
-
+			<dependency>
+				<groupId>org.uncommons.maths</groupId>
+				<artifactId>uncommons-maths</artifactId>
+				<version>1.2.2a</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

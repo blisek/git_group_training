@@ -2,7 +2,9 @@ package com.capgemini.math;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+
 import java.math.RoundingMode;
+
 import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -49,7 +51,7 @@ public class MathematicalOperationsTest {
 		int result = 1;
 		// when,then
 		assertEquals(result, MathematicalOperations.divisionWithRounding(x, y, RoundingMode.DOWN));
-}
+	}
 
 	@Test
 	public void testNumberIsParity() {
@@ -85,6 +87,7 @@ public class MathematicalOperationsTest {
 		Assertions.assertThat(result).isEqualTo(4611686014132420608L);
 
 	}
+
 	@Test
 	public void minIntegerValueExponentiationTest() {
 
@@ -98,4 +101,31 @@ public class MathematicalOperationsTest {
 
 	}
 
+	@Test
+	public void log10NaNArgumentTest() {
+		double value = Double.NaN;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(Double.NaN);
+	}
+
+	@Test
+	public void log10PowerOf10ArgumentTest() {
+		double value = 100;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(2);
+	}
+
+	@Test
+	public void log10LessThan0ArgumentTest() {
+		double value = -5;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(Double.NaN);
+	}
+
+	@Test
+	public void log10ZeroArgumentTest() {
+		double value = 0;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(Double.NEGATIVE_INFINITY);
+	}
 }

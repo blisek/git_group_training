@@ -22,46 +22,46 @@ public class INIParser {
 	 * @throws ParseException rzucany, gdy dane wejsciowe maja niepoprawny format.
 	 */
 	public void parse(InputStream is) throws IOException, ParseException {
-		try(@SuppressWarnings("resource") BufferedReader reader = 
-				new BufferedReader(new InputStreamReader(is))) {
-			String currentSection = null;
-			Properties currentProperties = null;
-			for(String line; (line = reader.readLine()) != null;) {
-				if(isComment(line) || "".equals(line)) {
-					continue;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		String currentSection = null;
+		Properties currentProperties = null;
+		for(String line; (line = reader.readLine()) != null;) {
+			if(isComment(line) || "".equals(line)) {
+				continue;
+			}
+			else if(isSection(line)) {
+				String parsedSectionName = parseSectionString(line);
+				if(parsedSectionName.equals(currentSection) || parsedIni.containsKey(parsedSectionName)) {
+					String errMsg = String.format("Section \"%s\" appears more than once.", parsedSectionName);
+					LOGGER.error(errMsg);
+					throw new ParseException(errMsg, 0);
 				}
-				else if(isSection(line)) {
-					String parsedSectionName = parseSectionString(line);
-					if(parsedSectionName.equals(currentSection) || parsedIni.containsKey(parsedSectionName)) {
-						String errMsg = String.format("Section \"%s\" appears more than once.", parsedSectionName);
-						LOGGER.error(errMsg);
-						throw new ParseException(errMsg, 0);
-					}
-					currentSection = parsedSectionName;
-					currentProperties = new Properties();
-					parsedIni.put(currentSection, currentProperties);
+				currentSection = parsedSectionName;
+				currentProperties = new Properties();
+				parsedIni.put(currentSection, currentProperties);
+			}
+			else if(isProperty(line)) {
+				String[] parsedProperty = parseProperty(line);
+				if(currentSection == null || currentProperties == null) {
+					String errMsg = String.format("Property \"%s\" must be under section", line);
+					LOGGER.error(errMsg);
+					throw new ParseException(errMsg, 0);
 				}
-				else if(isProperty(line)) {
-					String[] parsedProperty = parseProperty(line);
-					if(currentSection == null || currentProperties == null) {
-						String errMsg = String.format("Property \"%s\" must be under section", line);
-						LOGGER.error(errMsg);
-						throw new ParseException(errMsg, 0);
-					}
-					else if(currentProperties.containsKey(parsedProperty[0])) {
-						String errMsg = String.format("Property cannot contains more than one same key: %s", parsedProperty[0]);
-						LOGGER.error(errMsg);
-						throw new ParseException(errMsg, 0);
-					}
-					currentProperties.put(parsedProperty[0], parsedProperty[1]);
+				else if(currentProperties.containsKey(parsedProperty[0])) {
+					String errMsg = String.format("Property cannot contains more than one same key: %s", parsedProperty[0]);
+					LOGGER.error(errMsg);
+					throw new ParseException(errMsg, 0);
 				}
-				else {
-					String msg = String.format("Unknows char sequence \"%s\".", line);
-					LOGGER.error(msg);
-					throw new ParseException(msg, 0);
-				}
+				currentProperties.put(parsedProperty[0], parsedProperty[1]);
+			}
+			else {
+				String msg = String.format("Unknows char sequence \"%s\".", line);
+				LOGGER.error(msg);
+				throw new ParseException(msg, 0);
 			}
 		}
+		if(reader != null)
+			reader.close();
 		
 		parsed = true;
 	}

@@ -41,9 +41,16 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
+
+			<groupId>info.debatty</groupId>
+			<artifactId>java-string-similarity</artifactId>
+			<version>0.12</version>
+		</dependency>
+		<dependency>
 			<groupId>org.uncommons.maths</groupId>
 			<artifactId>uncommons-maths</artifactId>
 		</dependency>
+
 	</dependencies>
 
 

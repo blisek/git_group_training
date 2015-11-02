@@ -2,11 +2,8 @@ package com.capgemini.math;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-<<<<<<< HEAD
 
 import java.math.RoundingMode;
-=======
->>>>>>> michal/master
 
 import org.fest.assertions.Assertions;
 import org.junit.Before;
@@ -54,7 +51,7 @@ public class MathematicalOperationsTest {
 		int result = 1;
 		// when,then
 		assertEquals(result, MathematicalOperations.divisionWithRounding(x, y, RoundingMode.DOWN));
-}
+	}
 
 	@Test
 	public void testNumberIsParity() {
@@ -78,4 +75,79 @@ public class MathematicalOperationsTest {
 		Assertions.assertThat(result).isFalse();
 	}
 
+	@Test
+	public void maxIntegerValueExponentiationTest() {
+
+		// given
+		int number = Integer.MAX_VALUE;
+
+		// when
+		long result = MathematicalOperations.exponentiation(number);
+		// then
+		Assertions.assertThat(result).isEqualTo(4611686014132420608L);
+
+	}
+
+	@Test
+	public void minIntegerValueExponentiationTest() {
+
+		// given
+		int number = Integer.MIN_VALUE;
+
+		// when
+		long result = MathematicalOperations.exponentiation(number);
+		// then
+		Assertions.assertThat(result).isEqualTo(4611686018427387904L);
+
+	}
+
+	@Test
+	public void log10NaNArgumentTest() {
+		double value = Double.NaN;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(Double.NaN);
+	}
+
+	@Test
+	public void log10PowerOf10ArgumentTest() {
+		double value = 100;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(2);
+	}
+
+	@Test
+	public void log10LessThan0ArgumentTest() {
+		double value = -5;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(Double.NaN);
+	}
+
+	@Test
+	public void log10ZeroArgumentTest() {
+		double value = 0;
+		double result = MathematicalOperations.base10Logarithm(value);
+		Assertions.assertThat(result).isEqualTo(Double.NEGATIVE_INFINITY);
+	}
+	
+	@Test 
+	public void testCountRemainder() {
+		// given
+		String first = "7";
+		String second = "5";
+		// when
+		long result = MathematicalOperations.remainderOfDivision(first, second);
+		// then
+		Assertions.assertThat(result).isEqualTo(2);
+	}
+	
+	@Test
+	public void testCountRemainderNonValidString() {
+		// given
+		String first = "_";
+		String second = "5";
+		// when
+		long result = MathematicalOperations.remainderOfDivision(first, second);
+		// then
+		Assertions.assertThat(result).isEqualTo(-1);
+	}
 }
